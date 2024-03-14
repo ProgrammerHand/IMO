@@ -6,16 +6,16 @@
 int main() {
     const char* file_path = "kroA100.tsp";
     
-    // Read node coordinates and calculate distances
+    // read node coordinates and calculate distances
     std::vector<Point> nodes = readNodeCoordinates(file_path);
 
-    // Create a matrix of distances
+    // create matrix of distances
     std::vector<std::vector<int>> distanceMatrix = calculateDistanceMatrix(nodes);
 
-    // Print the distance matrix
+    // print distance matrix
     printDistanceMatrix(distanceMatrix);
 
-    // Save the distance matrix to a file
+    // save distance matrix to file
     saveDistanceMatrixToFile(distanceMatrix, "output.txt");
 
     return 0;
