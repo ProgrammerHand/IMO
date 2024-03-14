@@ -14,7 +14,7 @@ std::vector<std::vector<int>> calculateDistanceMatrix(const std::vector<Point>& 
         for (size_t j = 0; j < i; ++j) {
             int distance = calculateRoundedDistance(nodes[i], nodes[j]);
             distanceMatrix[i][j] = distance;
-            distanceMatrix[j][i] = distance;  // Symmetric matrix
+            distanceMatrix[j][i] = distance;  // symmetric matrix
         }
     }
     return distanceMatrix;

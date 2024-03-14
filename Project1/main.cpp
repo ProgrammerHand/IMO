@@ -18,10 +18,10 @@ int main() {
     // creating a matrix of distances
     std::vector<std::vector<int>> distanceMatrix = calculateDistanceMatrix(nodes);
 
-    // // Print the distance matrix
+    // // print distance matrix
     // printDistanceMatrix(distanceMatrix);
 
-    // // Save the distance matrix to a file
+    // // save distance matrix to file
     // saveDistanceMatrixToFile(distanceMatrix, "output.txt");
 
     // size of each tour
