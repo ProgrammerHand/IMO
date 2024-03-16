@@ -49,18 +49,17 @@ void saveDistanceMatrixToFile(const std::vector<std::vector<int>>& distanceMatri
     }
 }
 
-void writeResultsToCSV(const std::vector<int>& tour1, double tour1Length, const std::vector<int>& tour2, double tour2Length, std::ofstream& outputFile) {
+void writeResultsToCSV(const std::vector<int>& tour1, const std::vector<int>& tour2, double length, std::ofstream& outputFile) {
     for (int vertex : tour1) {
         outputFile << vertex << ",";
     }
     outputFile << std::endl;
 
-    outputFile << tour1Length << std::endl;
 
     for (int vertex : tour2) {
         outputFile << vertex << ",";
     }
     outputFile << std::endl;
 
-    outputFile << tour2Length << std::endl;
+    outputFile << length << std::endl;
 }

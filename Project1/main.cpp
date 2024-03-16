@@ -27,7 +27,8 @@ int main() {
 
     // size of each tour
     int tourSize = 50;
-
+    int toursSumLength = 0;
+    TwoTours result = greedyAlgorithmRandomStart(distanceMatrix, tourSize);
 
     std::ofstream outputFile1("results_kroA100.csv");
     if (!outputFile1.is_open()) {
@@ -36,13 +37,19 @@ int main() {
     }
 
     for (int i = 0; i < 100; ++i) {
+        toursSumLength = 0;
         // greedy algorithm with random starting vertices for two independent tours
-        TwoTours result = greedyAlgorithmRandomStart(distanceMatrix, tourSize);
-        int tour1Length = calculateTourLength(result.tour1.vertices, distanceMatrix);
-        int tour2Length = calculateTourLength(result.tour2.vertices, distanceMatrix);
-        std::cout << "\nTour 1 Length: " << calculateTourLength(result.tour1.vertices, distanceMatrix) << std::endl;
-        std::cout << "\nTour 2 Length: " << calculateTourLength(result.tour2.vertices, distanceMatrix) << std::endl;
-        writeResultsToCSV(result.tour1.vertices, tour1Length, result.tour2.vertices, tour2Length, outputFile1);
+        result = greedyAlgorithmRandomStart(distanceMatrix, tourSize);
+        toursSumLength += calculateTourLength(result.tour1.vertices, distanceMatrix);
+        toursSumLength += calculateTourLength(result.tour2.vertices, distanceMatrix);
+        for (int vertex : result.tour1.vertices) {
+            std::cout << vertex << " ";
+        }
+        for (int vertex : result.tour2.vertices) {
+            std::cout << vertex << " ";
+        }
+        std::cout << "\nTours sum Length: " << toursSumLength << std::endl;
+        writeResultsToCSV(result.tour1.vertices, result.tour2.vertices, toursSumLength, outputFile1);
     }
 
     file_path = "kroB100.tsp";
@@ -58,16 +65,21 @@ int main() {
         std::cerr << "Error opening output file." << std::endl;
         return 1;
     }
-
     std::cout << file_path << std::endl;
     for (int i = 0; i < 100; ++i) {
         // greedy algorithm with random starting vertices for two independent tours
-        TwoTours result = greedyAlgorithmRandomStart(distanceMatrix, tourSize);
-        int tour1Length = calculateTourLength(result.tour1.vertices, distanceMatrix);
-        int tour2Length = calculateTourLength(result.tour2.vertices, distanceMatrix);
-        std::cout << "\nTour 1 Length: " << calculateTourLength(result.tour1.vertices, distanceMatrix) << std::endl;
-        std::cout << "\nTour 2 Length: " << calculateTourLength(result.tour2.vertices, distanceMatrix) << std::endl;
-        writeResultsToCSV(result.tour1.vertices, tour1Length, result.tour2.vertices, tour2Length, outputFile2);
+        toursSumLength = 0;
+        result = greedyAlgorithmRandomStart(distanceMatrix, tourSize);
+        toursSumLength = calculateTourLength(result.tour1.vertices, distanceMatrix);
+        toursSumLength = calculateTourLength(result.tour2.vertices, distanceMatrix);
+        for (int vertex : result.tour1.vertices) {
+            std::cout << vertex << " ";
+        }
+        for (int vertex : result.tour2.vertices) {
+            std::cout << vertex << " ";
+        }
+        std::cout << "\nTours sum Length: " << toursSumLength << std::endl;
+        writeResultsToCSV(result.tour1.vertices, result.tour2.vertices, toursSumLength, outputFile2);
     }
 
 

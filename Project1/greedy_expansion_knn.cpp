@@ -4,6 +4,8 @@
 #include <algorithm>
 #include <cstdlib>
 #include <climits>
+#include <random>
+#include <chrono>
 #include "greedy_expansion_knn.h"
 
 // total tour length
@@ -30,9 +32,12 @@ std::pair<int, int> chooseRandomStartingVertices(size_t numVertices) {
 }
 
 std::pair<int, int> chooseRandomFurthestVertices (size_t numVertices, const std::vector<std::vector<int>>& distanceMatrix) {
-    srand(static_cast<unsigned>(time(0)));
-
-    int startVertex1 = rand() % numVertices;
+    // srand(static_cast<unsigned>(time(0)));
+    // int startVertex1 = rand() % numVertices;
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::mt19937 gen(seed);
+    std::uniform_int_distribution<int> rowDist(0, numVertices - 1);
+    int startVertex1 = rowDist(gen);
 
     // distances from startVertex1 to all other vertices
     std::vector<int> distances(numVertices);
