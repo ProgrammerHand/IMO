@@ -11,9 +11,17 @@ std::vector<Point> readNodeCoordinates(const char* file_path) {
     if (file.is_open()) {
         std::string line;
         while (std::getline(file, line) && line.find("NODE_COORD_SECTION") == std::string::npos);
+        while (std::getline(file, line)) {
+            if (line.empty() || line[0] == 'E') // Empty line or EOF
+                break;
 
-        Point node;
-        while (file >> node.x >> node.y) {
+            std::istringstream istrstream(line);
+            int node_number;
+            int x, y;
+            istrstream >> node_number >> x >> y;
+            Point node;
+            node.x = x;
+            node.y = y;
             nodes.push_back(node);
         }
 
