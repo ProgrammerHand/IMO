@@ -48,3 +48,19 @@ void saveDistanceMatrixToFile(const std::vector<std::vector<int>>& distanceMatri
         std::cerr << "Error creating output file.\n";
     }
 }
+
+void writeResultsToCSV(const std::vector<int>& tour1, double tour1Length, const std::vector<int>& tour2, double tour2Length, std::ofstream& outputFile) {
+    for (int vertex : tour1) {
+        outputFile << vertex << ",";
+    }
+    outputFile << std::endl;
+
+    outputFile << tour1Length << std::endl;
+
+    for (int vertex : tour2) {
+        outputFile << vertex << ",";
+    }
+    outputFile << std::endl;
+
+    outputFile << tour2Length << std::endl;
+}

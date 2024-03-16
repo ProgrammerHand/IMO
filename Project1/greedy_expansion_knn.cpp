@@ -107,7 +107,10 @@ TwoTours greedyAlgorithmRandomStart(const std::vector<std::vector<int>>& distanc
     std::pair<int, int> startingVertices = chooseRandomFurthestVertices(numVertices, distanceMatrix);
 
     // tours initialization with selected starting vertices
-    std::pair<Tour, Tour> tours = initializeToursAndRemoveStartingVertices(startingVertices, distanceMatrix);
+    Tour tour1 = {{startingVertices.first}};
+    Tour tour2 = {{startingVertices.second}};
+    std::pair<Tour, Tour> tours = {tour1, tour2};
+    // std::pair<Tour, Tour> tours = initializeToursAndRemoveStartingVertices(startingVertices, distanceMatrix);
 
     // availableVertices vector initialization
     std::vector<int> availableVertices(numVertices);

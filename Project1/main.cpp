@@ -7,6 +7,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <climits>
+#include <fstream>
 
 
 int main() {
@@ -28,20 +29,32 @@ int main() {
     int tourSize = 50;
 
     // greedy algorithm with random starting vertices for two independent tours
-    TwoTours result = greedyAlgorithmRandomStart(distanceMatrix, tourSize);
-
-    // resulting tours print
-    std::cout << "Resulting Tour 1: ";
-    for (int vertex : result.tour1.vertices) {
-        std::cout << vertex << " ";
+    std::ofstream outputFile("results.csv");
+    if (!outputFile.is_open()) {
+        std::cerr << "Error opening output file." << std::endl;
+        return 1;
     }
-    std::cout << "\nTour 1 Length: " << calculateTourLength(result.tour1.vertices, distanceMatrix) << std::endl;
 
-    std::cout << "\nResulting Tour 2: ";
-    for (int vertex : result.tour2.vertices) {
-        std::cout << vertex << " ";
+    for (int i = 0; i < 100; ++i) {
+        TwoTours result = greedyAlgorithmRandomStart(distanceMatrix, tourSize);
+        int tour1Length = calculateTourLength(result.tour1.vertices, distanceMatrix);
+        int tour2Length = calculateTourLength(result.tour2.vertices, distanceMatrix);
+        writeResultsToCSV(result.tour1.vertices, tour1Length, result.tour2.vertices, tour2Length, outputFile);
     }
-    std::cout << "\nTour 2 Length: " << calculateTourLength(result.tour2.vertices, distanceMatrix) << std::endl;
+    // // resulting tours print
+    // std::cout << "Resulting Tour 1: ";
+    // for (int vertex : result.tour1.vertices) {
+    //     std::cout << vertex << " ";
+    // }
+    // std::cout << std::endl;
+    // std::cout << "\nTour 1 Length: " << calculateTourLength(result.tour1.vertices, distanceMatrix) << std::endl;
+
+    // std::cout << "\nResulting Tour 2: ";
+    // for (int vertex : result.tour2.vertices) {
+    //     std::cout << vertex << " ";
+    // }
+    // std::cout << std::endl;
+    // std::cout << "\nTour 2 Length: " << calculateTourLength(result.tour2.vertices, distanceMatrix) << std::endl;
 
     return 0;
 }
