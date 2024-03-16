@@ -2,6 +2,8 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <vector>
+#include <string>
 
 
 std::vector<Point> readNodeCoordinates(const char* file_path) {
@@ -47,4 +49,29 @@ void saveDistanceMatrixToFile(const std::vector<std::vector<int>>& distanceMatri
     } else {
         std::cerr << "Error creating output file.\n";
     }
+}
+
+void writeVerticesToFile(const std::vector<std::vector<int>>& graph, int totalCycleLength, const std::string& filename) {
+    // otwórz plik
+    std::ofstream outputFile(filename); 
+
+    // sprawdź czy pooprawnie się otworzył
+    if (!outputFile.is_open()) {
+        std::cerr << "Error opening file" << std::endl;
+        return;
+    }
+
+    // wpisuj pary wierzchołków do pliku
+    for (int i = 0; i < graph.size(); i++) {
+        for (int j = i + 1; j < graph[0].size(); j++) {
+            if (graph[i][j] != 0) {
+                outputFile << i << " " << j << '\n';
+            }
+        }
+    }
+
+    outputFile << '\n' << totalCycleLength << '\n';
+
+    // zamknij plik
+    outputFile.close(); 
 }
