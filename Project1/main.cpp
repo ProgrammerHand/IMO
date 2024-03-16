@@ -11,7 +11,7 @@
 
 
 int main() {
-    const char* file_path = "kroA100.tsp";
+    char* file_path = "kroA100.tsp";
     
     // reading node coordinates and calculating distances
     std::vector<Point> nodes = readNodeCoordinates(file_path);
@@ -28,19 +28,49 @@ int main() {
     // size of each tour
     int tourSize = 50;
 
-    // greedy algorithm with random starting vertices for two independent tours
-    std::ofstream outputFile("results.csv");
-    if (!outputFile.is_open()) {
+
+    std::ofstream outputFile1("results_kroA100.csv");
+    if (!outputFile1.is_open()) {
         std::cerr << "Error opening output file." << std::endl;
         return 1;
     }
 
     for (int i = 0; i < 100; ++i) {
+        // greedy algorithm with random starting vertices for two independent tours
         TwoTours result = greedyAlgorithmRandomStart(distanceMatrix, tourSize);
         int tour1Length = calculateTourLength(result.tour1.vertices, distanceMatrix);
         int tour2Length = calculateTourLength(result.tour2.vertices, distanceMatrix);
-        writeResultsToCSV(result.tour1.vertices, tour1Length, result.tour2.vertices, tour2Length, outputFile);
+        std::cout << "\nTour 1 Length: " << calculateTourLength(result.tour1.vertices, distanceMatrix) << std::endl;
+        std::cout << "\nTour 2 Length: " << calculateTourLength(result.tour2.vertices, distanceMatrix) << std::endl;
+        writeResultsToCSV(result.tour1.vertices, tour1Length, result.tour2.vertices, tour2Length, outputFile1);
     }
+
+    file_path = "kroB100.tsp";
+    
+    // reading node coordinates and calculating distances
+    nodes = readNodeCoordinates(file_path);
+
+    // creating a matrix of distances
+    distanceMatrix = calculateDistanceMatrix(nodes);
+
+        std::ofstream outputFile2("results_kroB100.csv");
+    if (!outputFile2.is_open()) {
+        std::cerr << "Error opening output file." << std::endl;
+        return 1;
+    }
+
+    std::cout << file_path << std::endl;
+    for (int i = 0; i < 100; ++i) {
+        // greedy algorithm with random starting vertices for two independent tours
+        TwoTours result = greedyAlgorithmRandomStart(distanceMatrix, tourSize);
+        int tour1Length = calculateTourLength(result.tour1.vertices, distanceMatrix);
+        int tour2Length = calculateTourLength(result.tour2.vertices, distanceMatrix);
+        std::cout << "\nTour 1 Length: " << calculateTourLength(result.tour1.vertices, distanceMatrix) << std::endl;
+        std::cout << "\nTour 2 Length: " << calculateTourLength(result.tour2.vertices, distanceMatrix) << std::endl;
+        writeResultsToCSV(result.tour1.vertices, tour1Length, result.tour2.vertices, tour2Length, outputFile2);
+    }
+
+
     // // resulting tours print
     // std::cout << "Resulting Tour 1: ";
     // for (int vertex : result.tour1.vertices) {
