@@ -99,7 +99,7 @@ void greedyExpansion(Tour& tour, const std::vector<std::vector<int>>& distanceMa
             }
         }
     }
-    bestInsertPosition = (bestInsertPosition == 0) ? bestInsertPosition+1 : bestInsertPosition;
+    // bestInsertPosition = (bestInsertPosition == 0) ? bestInsertPosition+1 : bestInsertPosition;
     tour.vertices.insert(tour.vertices.begin() + bestInsertPosition, bestInsertedVertex);
     availableVertices.erase(std::remove(availableVertices.begin(), availableVertices.end(), bestInsertedVertex), availableVertices.end());
 }
