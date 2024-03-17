@@ -45,6 +45,7 @@ int main() {
         for (int vertex : result.tour1.vertices) {
             std::cout << vertex << " ";
         }
+        std::cout << std::endl ;
         for (int vertex : result.tour2.vertices) {
             std::cout << vertex << " ";
         }
@@ -65,7 +66,7 @@ int main() {
         std::cerr << "Error opening output file." << std::endl;
         return 1;
     }
-    std::cout << file_path << std::endl;
+    std::cout << file_path << std::endl << std::endl << std::endl;
     for (int i = 0; i < 100; ++i) {
         // greedy algorithm with random starting vertices for two independent tours
         toursSumLength = 0;
@@ -75,6 +76,7 @@ int main() {
         for (int vertex : result.tour1.vertices) {
             std::cout << vertex << " ";
         }
+        std::cout << std::endl ;
         for (int vertex : result.tour2.vertices) {
             std::cout << vertex << " ";
         }
