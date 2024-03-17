@@ -71,8 +71,8 @@ int main() {
         // greedy algorithm with random starting vertices for two independent tours
         toursSumLength = 0;
         result = greedyAlgorithmRandomStart(distanceMatrix, tourSize);
-        toursSumLength = calculateTourLength(result.tour1.vertices, distanceMatrix);
-        toursSumLength = calculateTourLength(result.tour2.vertices, distanceMatrix);
+        toursSumLength += calculateTourLength(result.tour1.vertices, distanceMatrix);
+        toursSumLength += calculateTourLength(result.tour2.vertices, distanceMatrix);
         for (int vertex : result.tour1.vertices) {
             std::cout << vertex << " ";
         }
