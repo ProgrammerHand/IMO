@@ -38,7 +38,7 @@ std::pair<int, int> chooseRandomFurthestVertices (size_t numVertices, const std:
     std::mt19937 gen(seed);
     std::uniform_int_distribution<int> rowDist(0, numVertices - 1);
     int startVertex1 = rowDist(gen);
-
+    
     // distances from startVertex1 to all other vertices
     std::vector<int> distances(numVertices);
     for (size_t i = 0; i < numVertices; ++i) {
@@ -54,7 +54,7 @@ std::pair<int, int> chooseRandomFurthestVertices (size_t numVertices, const std:
             startVertex2 = static_cast<int>(i);
         }
     }
-
+    std::cout << startVertex1 << "  " <<startVertex2 << std::endl;
     return {startVertex1, startVertex2};
 }
 
@@ -99,7 +99,7 @@ void greedyExpansion(Tour& tour, const std::vector<std::vector<int>>& distanceMa
             }
         }
     }
-
+    bestInsertPosition = (bestInsertPosition == 0) ? bestInsertPosition+1 : bestInsertPosition;
     tour.vertices.insert(tour.vertices.begin() + bestInsertPosition, bestInsertedVertex);
     availableVertices.erase(std::remove(availableVertices.begin(), availableVertices.end(), bestInsertedVertex), availableVertices.end());
 }
