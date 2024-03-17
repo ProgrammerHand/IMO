@@ -40,8 +40,7 @@ int main() {
         toursSumLength = 0;
         // greedy algorithm with random starting vertices for two independent tours
         result = greedyAlgorithmRandomStart(distanceMatrix, tourSize);
-        toursSumLength += calculateTourLength(result.tour1.vertices, distanceMatrix);
-        toursSumLength += calculateTourLength(result.tour2.vertices, distanceMatrix);
+        toursSumLength += calculateTourLength(result.tour1.vertices, distanceMatrix) + calculateTourLength(result.tour2.vertices, distanceMatrix);; 
         for (int vertex : result.tour1.vertices) {
             std::cout << vertex << " ";
         }
@@ -71,8 +70,7 @@ int main() {
         // greedy algorithm with random starting vertices for two independent tours
         toursSumLength = 0;
         result = greedyAlgorithmRandomStart(distanceMatrix, tourSize);
-        toursSumLength += calculateTourLength(result.tour1.vertices, distanceMatrix);
-        toursSumLength += calculateTourLength(result.tour2.vertices, distanceMatrix);
+        toursSumLength += calculateTourLength(result.tour1.vertices, distanceMatrix) + calculateTourLength(result.tour2.vertices, distanceMatrix);
         for (int vertex : result.tour1.vertices) {
             std::cout << vertex << " ";
         }
@@ -83,22 +81,6 @@ int main() {
         std::cout << "\nTours sum Length: " << toursSumLength << std::endl;
         writeResultsToCSV(result.tour1.vertices, result.tour2.vertices, toursSumLength, outputFile2);
     }
-
-
-    // // resulting tours print
-    // std::cout << "Resulting Tour 1: ";
-    // for (int vertex : result.tour1.vertices) {
-    //     std::cout << vertex << " ";
-    // }
-    // std::cout << std::endl;
-    // std::cout << "\nTour 1 Length: " << calculateTourLength(result.tour1.vertices, distanceMatrix) << std::endl;
-
-    // std::cout << "\nResulting Tour 2: ";
-    // for (int vertex : result.tour2.vertices) {
-    //     std::cout << vertex << " ";
-    // }
-    // std::cout << std::endl;
-    // std::cout << "\nTour 2 Length: " << calculateTourLength(result.tour2.vertices, distanceMatrix) << std::endl;
 
     return 0;
 }
