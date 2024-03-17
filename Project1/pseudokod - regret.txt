@@ -1,0 +1,28 @@
+unvisited := zbiór wierzchołków nieodwiedzonych
+graph_path := pusty zbiór, który będzie przechowywać wierzchołki odwiedzone
+zainicjuj dwie zmienne losowe będące wierzchołkami od których algorytm rozpocznie iterację
+usuń te zmienne z graph_path
+total_length := zmienna przechowująca całkowitą długość ścieżek
+
+dopóki zbiór wierzchołków nieodwiedzonych nie jest pusty:
+	regrets := pusta lista, która będzie przechowywać wartości żalu
+	dla vertex := każdego elmentu ze zbioru nieodwiedzonych wierzchołków:
+		dla każdej liczby całkowitej z przedziału od 1 do rozmiaru zbioru wierzchołków odwiedzonych:
+			x := różnica dotychczasowej całkowitej długości trasy do sumy odległości między ostatnio odwiedzonymi dwoma wierzchołkami, 
+			przedostatnio odwiedzonym wierzchołkiem a nowym wierzchołkiem oraz między ostatnim odwiedzonym wierzchołkiem a nowym wierzchołkiem.
+			dodaj tę wartość do listy wraz z indeksem wierzchołka odwiedzonego i posortuj w porządku rosnącym
+		
+		jeżeli ilość wartości w tej liście nie przekracza wartości żalu:
+			regret := różnica ostatniej i pierwszej różnicy z tej listy
+		w przeciwnym wypadku:
+			regret := przeciwność pierwszej różnicy tej listy
+		length, best_i := zapisz najlepszą odległość wraz z indeksem
+		dodaj do regrets (regret, vertex, best_i, length)
+	temp := maksymalna wartość z listy regrets
+	best_vertex := temp[vertex]
+	best_i := temp[best_i]
+	total_length := temp[length]
+	dodaj best_vertex do graph_path w miejscu best_i
+	usuń best_vertex z unvisited
+zwróć graph_path, total_length
+			
